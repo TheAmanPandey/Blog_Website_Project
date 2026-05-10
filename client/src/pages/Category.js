@@ -23,19 +23,23 @@ function Category() {
 
     useEffect(() => {
 
+    const fetchData = async () => {
+
         const res = await dispatch(getMyProfile());
 
         if (!user || !user.token || res.payload.role !== "admin") {
             navigate('/');
-            return
+            return;
         }
 
         if (!categories) {
             dispatch(getAllCategory());
         }
+    };
 
-    }, [navigate, dispatch])
+    fetchData();
 
+}, [navigate, dispatch, user, categories]);
     const handleCategoryDelete = async (id) => {
         if (window.confirm('All the blogs belongs to this category would also get delete. Are you sure to delete it ?')) {
             const payload = { categoryId: id, prime: checkIfPrimeUser(user) }

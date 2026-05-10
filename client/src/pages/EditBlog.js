@@ -94,40 +94,62 @@ function EditBlog() {
     }
 
     useEffect(() => {
+
+    const fetchData = async () => {
+
         if (!auth || !auth.user || !auth.user.token) {
             navigate('/');
-            return
+            return;
         }
-
 
         if (!location.state || !location.state.blog) {
             navigate('/');
-            return
+            return;
         }
 
         const res = await dispatch(getAllCategory());
+
         if (res.type === '/category/get/rejected') {
             toast.error(res.payload);
             return;
         }
-        const data = []
-        res.payload.map(e => data.push({ text: e.name, key: e._id, value: e._id }))
+
+        const data = [];
+
+        res.payload.forEach(e => {
+            data.push({
+                text: e.name,
+                key: e._id,
+                value: e._id
+            });
+        });
+
         setAllCategories(data);
 
         // Setting All Values
         setTitle(location?.state?.blog?.title);
 
         const blocksFromHtml = htmlToDraft(location?.state?.blog?.desc);
+
         const { contentBlocks, entityMap } = blocksFromHtml;
-        const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+
+        const contentState = ContentState.createFromBlockArray(
+            contentBlocks,
+            entityMap
+        );
+
         const editorState = EditorState.createWithContent(contentState);
+
         setContent(editorState);
 
         setSelectCategory(location?.state?.blog?.category?._id);
-        setImage(location?.state?.blog?.coverPhoto)
 
+        setImage(location?.state?.blog?.coverPhoto);
+    };
 
-    }, [dispatch, navigate])
+    fetchData();
+
+}, [auth, dispatch, navigate, location]);
 
     return (
         <Fragment>

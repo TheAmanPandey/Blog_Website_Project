@@ -29,28 +29,42 @@ function EditAuthor() {
     const [activeItem, setActiveItem] = useState('');
 
     useEffect(() => {
+
+    const fetchData = async () => {
+
         if (!auth || !auth.user || !auth.user.token) {
             navigate('/');
-            return
+            return;
         }
+
         if (!location.state || !location.state.user) {
             navigate('/');
-            return
+            return;
         }
 
         setLoadingCompleteUserData(true);
         setActiveItem('published');
+
         // Get complete user data from userId
-        const res = await dispatch(getUserDetails({ userId: location.state.user._id }));
+        const res = await dispatch(
+            getUserDetails({
+                userId: location.state.user._id
+            })
+        );
+
         if (res.type === '/admin/getUserDetails/rejected') {
             navigate('/authors');
             toast.error(res.payload);
             return;
         }
+
         setUser(res.payload);
         setLoadingCompleteUserData(false);
+    };
 
-    }, [])
+    fetchData();
+
+}, [auth, navigate, location, dispatch]);
 
     // Toggle User role
     const [toggleRoleLoading, setToggleRoleLoading] = useState(false);

@@ -46,12 +46,21 @@ function SingleProfile() {
     }
 
     useEffect(() => {
+
+    const fetchProfile = async () => {
+
         setShowPeopleViewedModal(false);
         setShowFollowersModal(false);
         setShowFollowingModal(false);
+
         await dispatch(getAnyUserProfile(profileId));
+
         dispatch(customProfileReset());
-    }, [dispatch, navigate])
+    };
+
+    fetchProfile();
+
+}, [dispatch, navigate, profileId]);
 
     return (
         <Fragment>

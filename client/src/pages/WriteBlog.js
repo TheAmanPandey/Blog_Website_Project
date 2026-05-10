@@ -26,26 +26,42 @@ const WriteBlog = () => {
 
     useEffect(() => {
 
+    const fetchCategories = async () => {
+
         if (!profile?.isActivated) {
             navigate('/');
             return;
         }
 
         if (auth.user && auth.user.token) {
+
             const res = await dispatch(getAllCategory());
+
             if (res.type === '/category/get/rejected') {
                 toast.error(res.payload);
                 return;
             }
-            const data = []
-            res.payload.map(e => data.push({ text: e.name, key: e._id, value: e._id }))
+
+            const data = [];
+
+            res.payload.forEach(e => {
+                data.push({
+                    text: e.name,
+                    key: e._id,
+                    value: e._id
+                });
+            });
+
             setAllCategories(data);
-        }
-        else {
+
+        } else {
             navigate('/');
         }
+    };
 
-    }, [auth, profile, dispatch, navigate])
+    fetchCategories();
+
+}, [auth, profile, dispatch, navigate]);
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState(EditorState.createEmpty());

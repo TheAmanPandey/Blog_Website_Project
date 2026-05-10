@@ -22,19 +22,32 @@ function Blogs() {
     const [loadingBlogs, setLoadingBlogs] = useState(false);
 
     useEffect(() => {
+
+    const fetchData = async () => {
+
         if (!auth || !auth.user || !auth.user.token) {
             navigate('/');
-            return
+            return;
         }
+
         setLoadingBlogs(true);
+
         // Get all blogs of current user
-        const res = await dispatch(getBlogsOfUser({ userId: auth.user._id }));
+        const res = await dispatch(
+            getBlogsOfUser({ userId: auth.user._id })
+        );
+
         if (res.type === '/blog/specificUser/fulfilled') {
             setBlogs(res.payload);
             setActiveItem('published');
         }
+
         setLoadingBlogs(false);
-    }, [auth, dispatch, navigate])
+    };
+
+    fetchData();
+
+}, [auth, dispatch, navigate]);
 
     const handleMenuItemClick = async (name) => {
         setActiveItem(name);

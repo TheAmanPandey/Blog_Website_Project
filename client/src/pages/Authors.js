@@ -69,24 +69,30 @@ function Authors() {
 
     useEffect(() => {
 
+    const fetchData = async () => {
+
         if (!user || !user.token) {
             navigate('/');
-            return
+            return;
         }
 
         if (!profile) return;
 
         if (profile.role !== "admin") {
             navigate('/');
-            return
+            return;
         }
 
         const res = await dispatch(getAllUsers());
-        if (res.type === "/admin/getAllUsers/rejected") {
-            toast.error(res.payload)
-        }
 
-    }, [profile, navigate, dispatch])
+        if (res.type === "/admin/getAllUsers/rejected") {
+            toast.error(res.payload);
+        }
+    };
+
+    fetchData();
+
+}, [profile, navigate, dispatch, user]);
 
     const [searchVal, setSearchVal] = useState('');
     const [searchedUsersResult, setSearchedUsersResult] = useState([]);
