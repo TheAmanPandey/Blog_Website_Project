@@ -93,7 +93,7 @@ function EditBlog() {
         }
     }
 
-    useEffect(async () => {
+    useEffect(() => {
         if (!auth || !auth.user || !auth.user.token) {
             navigate('/');
             return

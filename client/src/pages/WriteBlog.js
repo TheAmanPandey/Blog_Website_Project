@@ -24,7 +24,7 @@ const WriteBlog = () => {
     const category = useSelector(state => state.category);
     const { profile } = useSelector(state => state.profile);
 
-    useEffect(async () => {
+    useEffect(() => {
 
         if (!profile?.isActivated) {
             navigate('/');

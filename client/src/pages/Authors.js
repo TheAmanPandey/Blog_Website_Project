@@ -67,7 +67,7 @@ function Authors() {
     const { profile } = useSelector(state => state.profile);
     const { usersList, isLoading } = useSelector(state => state.admin);
 
-    useEffect(async () => {
+    useEffect(() => {
 
         if (!user || !user.token) {
             navigate('/');

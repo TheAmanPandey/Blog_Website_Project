@@ -28,7 +28,7 @@ function EditAuthor() {
     const [loadingCompleteUserData, setLoadingCompleteUserData] = useState(false);
     const [activeItem, setActiveItem] = useState('');
 
-    useEffect(async () => {
+    useEffect(() => {
         if (!auth || !auth.user || !auth.user.token) {
             navigate('/');
             return

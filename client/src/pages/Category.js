@@ -21,7 +21,7 @@ function Category() {
     const { user } = useSelector(state => state.auth);
     const { categories, isLoading } = useSelector(state => state.category);
 
-    useEffect(async () => {
+    useEffect(() => {
 
         const res = await dispatch(getMyProfile());
 

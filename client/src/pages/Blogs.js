@@ -21,7 +21,7 @@ function Blogs() {
     const [activeItem, setActiveItem] = useState('');
     const [loadingBlogs, setLoadingBlogs] = useState(false);
 
-    useEffect(async () => {
+    useEffect(() => {
         if (!auth || !auth.user || !auth.user.token) {
             navigate('/');
             return

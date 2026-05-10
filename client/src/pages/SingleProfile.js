@@ -45,7 +45,7 @@ function SingleProfile() {
         setShowFollowingModal(!showFollowingModal);
     }
 
-    useEffect(async () => {
+    useEffect(() => {
         setShowPeopleViewedModal(false);
         setShowFollowersModal(false);
         setShowFollowingModal(false);
