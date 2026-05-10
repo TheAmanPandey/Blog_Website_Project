@@ -144,7 +144,7 @@ const WriteBlog = () => {
                                 <img
                                     className="writeImg"
                                     src={URL.createObjectURL(image)}
-                                    alt="image"
+                                    alt="blog cover"
                                 />
                             }
                             {category?.categories &&
