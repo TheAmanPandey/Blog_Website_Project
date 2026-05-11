@@ -90,9 +90,14 @@ const WriteBlog = () => {
         }
 
         const coverPhoto = await ImageUpload();
+        const htmlContent = draftToHtml(
+            convertToRaw(content.getCurrentContent())
+        );
+
         const data = {
             title,
-            desc: draftToHtml(convertToRaw(content.getCurrentContent())),
+            desc: htmlContent,
+            content: htmlContent,
             coverPhoto,
             category: selectCategory
         }
