@@ -117,7 +117,7 @@ const WriteBlog = () => {
         setCloudinaryUploadLoading(true);
         let data = new FormData();
         data.append("file", image);
-        data.append("upload_preset", "ml_default");
+        data.append("upload_preset", "mern_blog");
         data.append("cloud_name", CLOUDINARY_USER_NAME);
         try {
             const res = await axios.post(`https://api.cloudinary.com/v1_1/${CLOUDINARY_USER_NAME}/image/upload`, data);
