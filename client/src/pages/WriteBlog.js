@@ -124,7 +124,8 @@ const WriteBlog = () => {
             setCloudinaryUploadLoading(false);
             return res.data.url;
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
+            console.log(err.response.data);
             setCloudinaryUploadLoading(false);
             return null
         }
