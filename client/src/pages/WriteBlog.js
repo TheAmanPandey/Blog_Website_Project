@@ -90,14 +90,9 @@ const WriteBlog = () => {
         }
 
         const coverPhoto = await ImageUpload();
-        const htmlContent = draftToHtml(
-            convertToRaw(content.getCurrentContent())
-        );
-
         const data = {
             title,
-            desc: htmlContent,
-            content: htmlContent,
+            desc: draftToHtml(convertToRaw(content.getCurrentContent())),
             coverPhoto,
             category: selectCategory
         }
@@ -129,7 +124,7 @@ const WriteBlog = () => {
             setCloudinaryUploadLoading(false);
             return res.data.url;
         } catch (err) {
-            // console.log(err);
+            console.log(err);
             setCloudinaryUploadLoading(false);
             return null
         }
